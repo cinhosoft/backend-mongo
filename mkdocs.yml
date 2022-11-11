@@ -1,0 +1,6 @@
+site_name: Tutorial Backend Mongo
+nav: 
+  - Inicio: 'index.md'
+  - 'MisionTIC - UNAB': 
+    - 'Marlon A. Galvis': '#'
+theme: readthedocs
