@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Tutorial Backend Mongo</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Inicio";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> Tutorial Backend Mongo
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Inicio</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-crear-la-proyecto">1. Crear la Proyecto:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-conexion-a-la-base-de-datos-en-mongo-atlas">2. Conexion a la base de datos en MONGO Atlas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-crear-la-base-de-datos-en-mongo-nube">3. Crear la Base de Datos en Mongo Nube:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-crear-el-modelo">4. Crear el Modelo</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-crear-el-repositorio">5. Crear el Repositorio</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-crear-la-interface-para-el-servicio">5. Crear la Interface para el Servicio</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-implementamos-la-interface-services">6. Implementamos la Interface Services</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-crear-el-controlador">6. Crear el Controlador</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">MisionTIC - UNAB</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="#">Marlon A. Galvis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Tutorial Backend Mongo</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Inicio</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="crear-apirest-con-netbeans-springboot-y-mongodb">Crear APIREST con NetBeans SpringBoot y MONGODB</h1>
+<h2 id="1-crear-la-proyecto">1. Crear la Proyecto:</h2>
+<p>Vamos a File New Project…</p>
+<p><img alt="" src="imagenes/2022-11-06%2015_46_40-Window.png" /></p>
+<p>Luego Seleccionar la Categoria: Java with Maven y en Project: Spring Boot Inizializr project</p>
+<p><img alt="" src="imagenes/paso2.png" /></p>
+<p>Digitamos el Nombre de nuestro grupo de paquetes, el Artifact, el Empaquetado, la descripción, el lenguaje Java y la version:</p>
+<p><img alt="" src="imagenes/paso3.png" /></p>
+<p>Agregamos las dependencias:</p>
+<p><img alt="" src="imagenes/dependencias.png" /></p>
+<p>Buscamos la dependencia de MONGODB:</p>
+<p><img alt="" src="imagenes/paso4.png" /></p>
+<p>Agregamos el nombre y ubicación del proyecto:</p>
+<p><img alt="" src="imagenes/paso5.png" /></p>
+<h2 id="2-conexion-a-la-base-de-datos-en-mongo-atlas">2. Conexion a la base de datos en MONGO Atlas</h2>
+<p>Se debe iniciar sesion en <a href="account.mongodb.com">account.mongodb.com</a></p>
+<p><img alt="" src="imagenes/paso6.png" /></p>
+<p>Si no se tiene cuente se pueden registrar en <a href="https://account.mongodb.com/account/register">https://account.mongodb.com/account/register</a>:</p>
+<p><img alt="" src="imagenes/paso7.png" /></p>
+<p>Una vez se inicia sesion, se debe crear el cluster, nos dan uno gratis, con ciertas limitaciones para pruebas:</p>
+<p><img alt="" src="imagenes/paso8.png" /></p>
+<p>Una vez terminamos de crear el cluster, debemos crear un usuario:</p>
+<p><img alt="" src="imagenes/paso9.png" /></p>
+<p>Tambien es importante configurar el modo de conexion, en nuestro caso vamos a usar Cloud:</p>
+<p><img alt="" src="imagenes/paso10.png" /></p>
+<p>Debemos configurar las IP las cuales queremos que se puedan conectar, podemos dar click en Add My Current IP Address, para la IP desde la que estamos saliendo a Internet Actualmente, Si quieres permitir conexiones de cualquier aplicacion puedes agregar 0.0.0.0:</p>
+<p><img alt="" src="imagenes/paso11.png" /></p>
+<h2 id="3-crear-la-base-de-datos-en-mongo-nube">3. Crear la Base de Datos en Mongo Nube:</h2>
+<p>Vamos a dar click en Browse Collections:</p>
+<p><img alt="" src="imagenes/paso12.png" /></p>
+<p>Luego debemos dar click en Create Database, digitar el nombre de la base de datos y la primera coleccion, que en este ejemplo la llamamos anotaciones:</p>
+<p><img alt="" src="imagenes/paso13.png" /></p>
+<p>Una vez terminamos de crear la base de datos debemos tener algo como esto:</p>
+<p><img alt="" src="imagenes/paso14.png" /></p>
+<p>Se debe generar la cadena de conexión a la base de datos, para eso vamos a dar click en Database y luego Connect:</p>
+<p><img alt="" src="imagenes/paso15.png" /></p>
+<p>Seleccionamos la opcion Connect your application:</p>
+<p><img alt="" src="imagenes/paso16.png" /></p>
+<p>Vamos a seleccionar Java y la ultima Version Estable de SpringBoot, para que se genere la cadena de conexion de ejemplo la cual debemos compiar:</p>
+<p><img alt="" src="imagenes/paso17.png" /></p>
+<p>La cadena de conexion la debemos llevar al properties quedando asi:</p>
+<pre><code class="language-Java">spring.data.mongodb.uri=mongodb+srv://marlongalvis30:CONTRASEÑA@montomisiontic.irlknlv.mongodb.net/BitacoraMongo?retryWrites=true&amp;w=majority
+</code></pre>
+<p><img alt="" src="imagenes/paso18.png" /></p>
+<h2 id="4-crear-el-modelo">4. Crear el Modelo</h2>
+<p>Debemos crear el paquete models y despues agregamos una clase de java:</p>
+<p><img alt="" src="imagenes/paso19.png" /></p>
+<p>Creamos la clase Anotacion:</p>
+<p><img alt="" src="imagenes/paso20.png" /></p>
+<p>Una vez creado vamos agregar los campos de la clase, no es necesario agregar la anotacion @Entity solo vamos a agregar la anotacion @Id para especificar la llave primaria de la coleccion que llevara el mismo nombre de la clase "anotacion".</p>
+<p>Los Campos Quedarían Así:</p>
+<pre><code class="language-Java">@Id
+    private String id;
+    private String anotacion;
+    private String usuario;
+    private LocalDate fecha_actualizacion;
+</code></pre>
+<p>Luego procedemos a crear el contructor y los getter and setter:</p>
+<p>Damos Click derecho y luego Insert Code...</p>
+<p><img alt="" src="imagenes/paso21.png" /></p>
+<p>Luego Click en Constructor: 
+<img alt="" src="imagenes/paso22.png" /></p>
+<p>Vamos a dar click en Select All para sobrecargar el constructor con todos los campos y luego click en Generate:</p>
+<p><img alt="" src="imagenes/paso23.png" /></p>
+<p>Repetirmos el paso anterior click derecho y luego Inser Code... para llegar al punto donde aparece el menu, para seleccionar Getter And Setter:</p>
+<p><img alt="" src="imagenes/paso24.png" /></p>
+<p>El modelo de la Clase Antotaciones completo debe quedar así:</p>
+<pre><code class="language-Java">package co.edu.unab.api.models;
+
+import java.time.LocalDate;
+import org.springframework.data.annotation.Id;
+
+/**
+ *
+ * @author Marlon
+ */
+public class Anotacion {
+
+    @Id
+    private String id;
+    private String anotacion;
+    private String usuario;
+    private LocalDate fecha_actualizacion;
+
+    public Anotacion(String id, String anotacion, String usuario, LocalDate fecha_actualizacion) {
+        this.id = id;
+        this.anotacion = anotacion;
+        this.usuario = usuario;
+        this.fecha_actualizacion = fecha_actualizacion;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAnotacion() {
+        return anotacion;
+    }
+
+    public void setAnotacion(String anotacion) {
+        this.anotacion = anotacion;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public LocalDate getFecha_actualizacion() {
+        return fecha_actualizacion;
+    }
+
+    public void setFecha_actualizacion(LocalDate fecha_actualizacion) {
+        this.fecha_actualizacion = fecha_actualizacion;
+    }
+
+
+
+
+}
+</code></pre>
+<h2 id="5-crear-el-repositorio">5. Crear el Repositorio</h2>
+<p>Vamos a crear el paquete repositories, luego damos click derecho sobre el paquete para crear el Repositorio AnotacionRepository, seleccionamos Repository Interface...</p>
+<p><img alt="" src="imagenes/paso25.png" /></p>
+<p>Digitamos el nombre de la Clase AnotacionRepository, luego digitamos en el campo Entity Class el nombre del modelo Anotacion y el campo Id Class el tipo de dato del Identificador del Modelo en este ejemplo String. </p>
+<p><img alt="" src="imagenes/paso26.png" /></p>
+<p>En este caso en el paso anterior no seleccionamos una Base Interface sino que dejamos la que estaba seleccionada quedando el repositorio así:</p>
+<p><img alt="" src="imagenes/paso27.png" /></p>
+<p>En este caso para MongoDB no sirve ninguna de las opciones que da el plugin, por lo que vamos a editar el extends para que el repositorio herede de MongoRepository, adicionalmente agregamos el import del Modelo Anotacion, quedando el codigo de AnotacionRepository asi:</p>
+<pre><code class="language-Java">package co.edu.unab.api.repositories;
+
+import co.edu.unab.api.models.Anotacion;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
+
+/**
+ *
+ * @author Marlon
+ */
+public interface AnotacionRepository extends MongoRepository&lt;Anotacion, String&gt; {
+
+}
+</code></pre>
+<h2 id="5-crear-la-interface-para-el-servicio">5. Crear la Interface para el Servicio</h2>
+<p>Vamos agregar el paquete service y despues presionamos click derecho sobre el paquete New Java Interface</p>
+<p><img alt="" src="imagenes/paso28.png" /></p>
+<p>Digitamos el nombre de la Interface del Servico IAnotacionService:</p>
+<p><img alt="" src="imagenes/paso29.png" /></p>
+<p>Agregamos los metodos que vamos a utilizar en el Servicio quedando la Clsae IAnotacionService Así:</p>
+<pre><code class="language-Java">package co.edu.unab.api.services;
+
+import co.edu.unab.api.models.Anotacion; 
+import java.util.ArrayList;
+import java.util.Optional;
+
+/**
+ *
+ * @author Marlon
+ */
+public interface IAnotacionService {
+    public ArrayList&lt;Anotacion&gt; listarTodo();
+    public Anotacion guardar(Anotacion anotacion);
+    public boolean eliminar(String id);
+    public Optional&lt;Anotacion&gt; obtenerPorID(String id);
+    public ArrayList&lt;Anotacion&gt; obtenerPorUsuario(String usuario);
+
+}
+</code></pre>
+<h2 id="6-implementamos-la-interface-services">6. Implementamos la Interface Services</h2>
+<p>Debemos agregar dentro del paquete services el paquete Impl, damos click derecho sobre el paquete services y New Java Package...</p>
+<p><img alt="" src="imagenes/paso30.png" /></p>
+<p>Digitamos el nombre del Paquete el cual vamos a llamar impls:</p>
+<p><img alt="" src="imagenes/paso31.png" /></p>
+<p>Una vez creado el paquete debemos dar click derecho sobre el paquete impls y agregamos una nueva Service Class:</p>
+<p><img alt="" src="imagenes/paso32.png" /></p>
+<p>Digitamos el nombre de la Clase AnotacionService:</p>
+<p><img alt="" src="imagenes/paso33.png" /></p>
+<p>Una vez creada la clase vamos a implementar la interface con el comando <code>implements IAnotacionService</code> importamos la clase IAnotacionService e implementamos todos los metodos abstract.</p>
+<p>Para conectar el repositorio con el servicio vamos a inyecta el repositorio con la anotacion <code>Autowired</code> y declaramos la variable de Tipo AnotacionRepository quedando el codigo así:</p>
+<pre><code class="language-Java">    @Autowired
+    ClienteRepository clienteRepository;
+</code></pre>
+<p>Una vez definimos la variable con la que vamos a realizar las transacciones con el repositorio de Mongo, procedemos a programar cada uno de los metodos:</p>
+<p>El metodo listarTodo quedaría Así:</p>
+<pre><code class="language-Java">    @Override
+    public ArrayList&lt;Anotacion&gt; listarTodo() {
+        return (ArrayList&lt;Anotacion&gt;) anotacionRepository.findAll();
+    }
+</code></pre>
+<p>El metodo guardar quedaría Así:</p>
+<pre><code class="language-Java">    @Override
+    public Anotacion guardar(Anotacion anotacion) {
+        anotacion.setUsuario(anotacion.getUsuario().toLowerCase()); //Opcional, convertir la cadena a minúscula para facilitar buscar por nombre , esto normalmente se hace desde el frontend 
+        return anotacionRepository.save(anotacion);
+    }
+</code></pre>
+<p>El metodo eliminar quedaría Así:</p>
+<pre><code class="language-Java">    @Override
+    public boolean eliminar(String id) {
+        if (anotacionRepository.existsById(id)){
+            anotacionRepository.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }    
+    }
+</code></pre>
+<p>el metodo obtenerPorID quedaría Así:</p>
+<pre><code class="language-Java">    @Override
+    public Optional&lt;Anotacion&gt; obtenerPorID(String id) {
+         return anotacionRepository.findById(id);
+    }
+</code></pre>
+<p>para el metodo obtenerPorUsuario, debemos agregar una consulta en el repositorio AnotacionRepository para que se ejecute la busqueda por el campo usuario, que en este ejemplo seria el nombre del usuario, debemos modificar el archivo AnotacionRepository y agregar dentro de la Clase el siguiente codigo:</p>
+<pre><code class="language-Java">    @Query(&quot;{usuario:'?0'}&quot;)//El ?0 marcador de posición le permite sustituir el valor de los argumentos del método en la cadena de consulta JSON.
+    ArrayList&lt;Anotacion&gt; BuscarPorUsuario(String usuario);
+</code></pre>
+<p>Quedando el AnotacionRepository Así:</p>
+<p><img alt="" src="imagenes/paso34.png" /></p>
+<p>Entonces en el AnotacionService el metodo obtenerPorUsuario quedaría Así:</p>
+<pre><code class="language-Java">    @Override
+    public ArrayList&lt;Anotacion&gt; obtenerPorUsuario(String usuario) {
+        return anotacionRepository.BuscarPorUsuario(usuario);
+    }
+</code></pre>
+<h2 id="6-crear-el-controlador">6. Crear el Controlador</h2>
+<p>Vamos a crear el controlador, nos ubicamos en el paquete principal y creamos un nuevo Java Package, de nombre controllers y despues nuevamente damos click derecho esta vez sobre el paquete controllers y agregamos un nuevo archivo REST Controller Class:</p>
+<p><img alt="" src="imagenes/paso35.png" /></p>
+<p>Le digitamos el nombre AntotacionRestController, checkeamos el Generate CRUD methods y damos click en finalizar:</p>
+<p><img alt="" src="imagenes/paso36.png" /></p>
+<p>Modificamos la /url por /anotacion y los Object por la Clase Modelo Anotacion, cuando se cambie el Object por la clase Anotacion nos pedira que importemos Así:</p>
+<p><img alt="" src="imagenes/paso37.png" /></p>
+<p>El primer paso es inyectar nuestro servicio y lo vamos hacer con la anotacion <code>@Autowirded</code> quedando la declaración así:</p>
+<pre><code class="language-Java">    @Autowired
+    private IAnotacionService anotacionService;
+</code></pre>
+<p>Ahora vamos a codificar el metodo List para mostrar todas las anotaciones y quedaría Así:</p>
+<pre><code class="language-Java">    @GetMapping()
+    public List&lt;Anotacion&gt; list() {
+        return  anotacionService.listarTodo();
+    }
+</code></pre>
+<p>El Siguiente metodo es el get el cual lo vamos autilziar para buscar por Id y quedaría Asi:</p>
+<pre><code class="language-Java">    @GetMapping(&quot;/{id}&quot;)
+    public Object get(@PathVariable String id) {
+        return this.anotacionService.obtenerPorID(id);
+    }
+</code></pre>
+<p>El Siguiente metodo que vamos a editar es el metodo post el cual se va a utilizar para guardar, agreamos al metodo un segundo campo que sera utilizado para validar el request:</p>
+<p><code>BindingResult result</code></p>
+<p>El metodo quedaría Así:</p>
+<pre><code class="language-Java">    @PostMapping
+    public ResponseEntity&lt;?&gt; post(@RequestBody Anotacion input, BindingResult result) {
+        Anotacion nuevoDato = null;
+        Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();
+        if (result.hasErrors()) {
+            List&lt;String&gt; errors = result.getFieldErrors()
+                    .stream()
+                    .map(err -&gt; &quot;El campo '&quot; + err.getField() + &quot;' &quot; + err.getDefaultMessage())
+                    .collect(Collectors.toList());
+
+            response.put(&quot;errors&quot;, errors);
+            return new ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(response, HttpStatus.BAD_REQUEST);
+        }
+    try {
+            nuevoDato = anotacionService.guardar(input);
+        } catch (DataAccessException e) {
+            response.put(&quot;mensaje&quot;, &quot;Error al realizar el insert en la base de datos&quot;);
+            response.put(&quot;error&quot;, e.getMessage().concat(&quot;: &quot;).concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        response.put(&quot;mensaje&quot;, &quot;El dato ha sido actualizado con éxito!&quot;);
+        response.put(&quot;anotacion&quot;, nuevoDato);
+        return new ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(response, HttpStatus.CREATED);
+    }
+</code></pre>
+<p>Por ultimo el metodo eliminar el cual quedaria Así:</p>
+<pre><code class="language-Java">    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;?&gt; delete(@PathVariable String id) {
+       Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();
+       boolean resultadoEliminar=this.anotacionService.eliminar(id);
+        if (resultadoEliminar){
+            response.put(&quot;mensaje&quot;, &quot;Se eliminó el usuario con id: &quot;+id);
+
+        }else{
+             response.put(&quot;mensaje&quot;, &quot;No se pudo eliminar el usuario con el id: &quot;+id);
+             return new ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(response, HttpStatus.OK);
+    }
+</code></pre>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.4.2
+Build Date UTC : 2022-11-11 16:15:00.305733+00:00
+-->
